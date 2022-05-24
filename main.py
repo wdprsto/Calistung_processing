@@ -15,9 +15,6 @@ async def create_upload_file(image: UploadFile = File(...)):
     img_file = await image.read()
     converter = RequestImageConverter(img_file)
     converted_image = converter.convert()
-    
-    # preprocessor = ImagePreprocessor(converted_image)
-    # processed_image = preprocessor.process()
 
     text_recognizer = TextRecognizer(converted_image)
     recognized_text = text_recognizer.recognize_text()

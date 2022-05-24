@@ -77,7 +77,7 @@ class TextRecognizer:
             (x, y, w, h) = cv2.boundingRect(c)
             if (w >= min_w and w <= max_w) and (h >= min_h and h <= max_h):
                 # the one which is processed should be the greyscaled, not inverted dilated one
-                self.process_box(gray, x, y, w, h)
+                self.process_box(thresh, x, y, w, h)
         
         boxes = np.array([box[1] for box in self.characters])
         pixels = np.array([pixel[0] for pixel in self.characters], dtype = 'float32')
@@ -94,11 +94,6 @@ class TextRecognizer:
     def extract_roi(self, conts, x, y, w, h):
         roi = conts[y:y + h, x:x + w]
         return roi
-
-    #Thresholding
-    def thresholding(self, img):
-        _, thresh = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-        return thresh
 
     #Resize the Image
     def resize_img(self, img, w, h):
@@ -123,9 +118,8 @@ class TextRecognizer:
 
     def process_box(self, img, x, y, w, h):
         roi = self.extract_roi(img, x, y, w, h)
-        thresh = self.thresholding(roi)
-        (h, w) = thresh.shape
-        resized = self.resize_img(thresh, w, h)
+        (h, w) = roi.shape
+        resized = self.resize_img(roi, w, h)
         normalized = self.normalization(resized)
 
         self.characters.append((normalized, (x, y, w, h)))
