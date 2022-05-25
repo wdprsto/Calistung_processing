@@ -16,10 +16,7 @@ async def create_upload_file(image: UploadFile = File(...)):
     converter = RequestImageConverter(img_file)
     converted_image = converter.convert()
 
-    text_recognizer = TextRecognizer(converted_image)
-    recognized_text = text_recognizer.recognize_text()
-
-    inferencer = TFLiteInferencer(recognized_text)
+    inferencer = TFLiteInferencer(converted_image)
     prediction = inferencer.predict()
 
     return prediction

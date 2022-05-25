@@ -1,10 +1,12 @@
 import tensorflow as tf
 import numpy as np
 from itertools import groupby
+from image_preprocessing import TextRecognizer
 
 class TFLiteInferencer:
-    def __init__(self, processed_data):
-        self.processed_data = processed_data
+    def __init__(self, image):
+        recognizer = TextRecognizer(image)
+        self.processed_data = recognizer.recognize_text()
     
     def predict(self):
         # clear backend session of tf
