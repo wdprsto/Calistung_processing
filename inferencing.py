@@ -34,14 +34,14 @@ class TFLiteInferencer:
             output_data.append(interpreter.get_tensor(output_details))
 
         classLabels = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        predicted_data = []
+        # PROCESS TEXT, SINGLE OR MULTIPLE LINE
         if len(output_data)>1:
+            predicted_data = []
             for (prediction, (x, y, w, h)) in zip(output_data, boxes):
                 i = np.argmax(prediction)
                 character = classLabels[i]
                 predicted_data.append([character, x, y])
         
-        # PROCESS MULTILINE TEXT
             # first, group by the y value since we want to group per line
             a = np.array([i[2] for i in predicted_data])# or np.array(d)[:,n] if all the elements of d have the same shape
             b,c = np.where(np.abs(a-a[:,None]) < 20)# I used a maximum distance of 20 between character in group
@@ -55,6 +55,7 @@ class TFLiteInferencer:
             output = []
             _ = [[output.append(x[0]) for x in y] for y in grouped_list]
             output_text = "".join(output)
+        # PROCESS ONLY 1 CHARACTER
         else:
             i = np.argmax(output_data[0])
             output_text = classLabels[i]
