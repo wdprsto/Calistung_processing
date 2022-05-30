@@ -6,6 +6,10 @@
 | Create Machine Learning Model for Character Recognition | |  | ML Model Evaluation & Improvement | ML Model Evaluation & Improvement |
 | Develop Python code for TF Interpreter initialization, Image preprocessing, Inferencing, and Outputs fetching | | | |
 
+# Installing Requirements
+
+`pip install -r requirements.txt`
+
 # Character Recognition Endpoint
 
 | Endpoint | Method |           Body Sent          |                 Description                |
