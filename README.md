@@ -17,7 +17,8 @@
 |     /    |   GET  |                 None                |            Hello World Endpoint            |
 |     /predict    |  POST  |                 File ('image')               | Character Recognition from Model Inference |
 
-Percobaan deployment [link](https://fastapi-calistung.herokuapp.com/)
+Percobaan deployment [link](https://fastapi-calistung.herokuapp.com/docs)
+
 Lihat semua model yang telah kami buat di sini [link](https://drive.google.com/drive/folders/17BGn8J50Ls_p-1w69yIlcQ4LjwJtX9OT?usp=sharing).  
 
 CeTu2-Pe2SWaPanGa
