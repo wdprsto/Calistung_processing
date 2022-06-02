@@ -12,30 +12,6 @@ class RequestImageConverter:
         image = cv2.imdecode(numpy_image, cv2.IMREAD_COLOR)
         return image
 
-# class ImagePreprocessor:
-#     def __init__(self, image):
-#         self.image = image
-
-#     def process(self):
-#         # parameters
-#         identitiy_matrix_shape = (3, 3) #used in dilatation
-
-#         # make the image color grey
-#         gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
-
-#         # invert the image color
-#         _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-
-#         # dilatate the image
-#         dilated = cv2.dilate(thresh, np.ones(identitiy_matrix_shape, np.uint8))
-
-#         edges = cv2.Canny(dilated, 40, 150)
-
-#         # dilatate the image
-#         processed_image = cv2.dilate(edges, np.ones(identitiy_matrix_shape))
-
-#         return processed_image
-
 class TextRecognizer:
     def __init__(self, image):
         self.image = image

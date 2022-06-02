@@ -1,6 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
 from image_preprocessing import RequestImageConverter
-# from image_preprocessing import ImagePreprocessor
 from image_preprocessing import TextRecognizer
 from inferencing import TFLiteInferencer
 

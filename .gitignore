@@ -1,0 +1,12 @@
+__pycache__/
+.vscode/
+env/
+prev model/
+bash.exe.stackdump
+collab tips.jpg
+gui.py
+old_model.tflite
+hyper_model.tflite
+Procfile
+test.jpg
+tw1.jpg
