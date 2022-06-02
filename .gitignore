@@ -10,3 +10,4 @@ hyper_model.tflite
 Procfile
 test.jpg
 tw1.jpg
+.gitignore
