@@ -12,10 +12,14 @@ async def root():
 @app.post('/predict')
 async def create_upload_file(image: UploadFile = File(...)):
     img_file = await image.read()
+
+    if not img_file:
+        return {"result_predict" : ""}
     converter = RequestImageConverter(img_file)
     converted_image = converter.convert()
 
     inferencer = TFLiteInferencer(converted_image)
     prediction = inferencer.predict()
 
-    return prediction
+    return {"result_predict" : prediction}
+
