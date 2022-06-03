@@ -47,9 +47,12 @@ class TextRecognizer:
 
         # find countour
         conts = self.contour_detection(processed_image.copy())
+        
+        if not len(conts):
+            return ''
 
         # sort the contour
-        sorted_box = self.sort_contour(conts)
+        sorted_box = self.sort_contour(conts, processed_image.shape)
 
         # prepare the output
         for box in sorted_box:
@@ -65,7 +68,6 @@ class TextRecognizer:
     def contour_detection(self, img):
         conts = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
         conts = np.array([cv2.boundingRect(i) for i in conts])
-        conts = self.filter_edge_contour(conts, img.shape)
         return conts
 
     # Extract Range of Interest (ROI)
@@ -108,7 +110,9 @@ class TextRecognizer:
         res_y, res_x = image_shape
         return bounding_box[((res_x - w - x) * (res_y - h - y) * x * y) != 0]
 
-    def sort_contour(self, conts):
+    def sort_contour(self, conts, img_shape):
+        # filter segment in the edge
+        conts = self.filter_edge_contour(conts, img_shape)
         # sort the countur, 1st top to bottom (line by line), then left to right for each line
         # sort the data from y values/top
         sort_by_line = conts[np.argsort(conts[:, 1])]

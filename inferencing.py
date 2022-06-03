@@ -45,8 +45,12 @@ class TFLiteInferencer:
             output_text = "".join(predicted_data)
             
         # PROCESS ONLY 1 CHARACTER
-        else:
+        elif len(output_data)==1:
             i = np.argmax(output_data[0])
             output_text = classLabels[i]
-            
+        
+        # No Char
+        else:
+            output_text = ''
+
         return output_text
