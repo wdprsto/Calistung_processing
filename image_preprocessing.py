@@ -42,8 +42,8 @@ class TextRecognizer:
         STEP 2: TEXT RECOGNIZER
         '''
         # parameters
-        min_w, max_w = 15, 1200
-        min_h, max_h = 15, 1200
+        min_w, max_w = 30, 1200 # sebelumnya 15. Untuk gambar ukuran 240, titik bisa dihilangkan dengan min w/h = 30
+        min_h, max_h = 30, 1200
 
         # find countour
         conts = self.contour_detection(processed_image.copy())
@@ -52,7 +52,7 @@ class TextRecognizer:
             return ''
 
         # sort the contour
-        sorted_box = self.sort_contour(conts, processed_image.shape)
+        sorted_box = self.sort_contour(conts)
 
         # prepare the output
         for box in sorted_box:
@@ -104,15 +104,7 @@ class TextRecognizer:
 
         self.characters.append(normalized)
 
-    # filter segments that touch the edge of the image
-    def filter_edge_contour(self, bounding_box, image_shape):
-        x, y, w, h = bounding_box[:, 0], bounding_box[:, 1], bounding_box[:, 2], bounding_box[:, 3]
-        res_y, res_x = image_shape
-        return bounding_box[((res_x - w - x) * (res_y - h - y) * x * y) != 0]
-
-    def sort_contour(self, conts, img_shape):
-        # filter segment in the edge
-        conts = self.filter_edge_contour(conts, img_shape)
+    def sort_contour(self, conts):
         # sort the countur, 1st top to bottom (line by line), then left to right for each line
         # sort the data from y values/top
         sort_by_line = conts[np.argsort(conts[:, 1])]
