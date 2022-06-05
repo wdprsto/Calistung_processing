@@ -98,7 +98,6 @@ class TextRecognizer:
 
     def process_box(self, img, x, y, w, h):
         roi = self.extract_roi(img, x, y, w, h)
-        (h, w) = roi.shape
         resized = self.resize_img(roi, w, h)
         normalized = self.normalization(resized)
 
