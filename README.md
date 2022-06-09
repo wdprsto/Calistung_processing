@@ -43,3 +43,6 @@ Calistung: Baca, Tulis, Hitung is an application that provide educational featur
   - Input the image that you want predict as a value of the key
   - Send the request, or
   - Simply access `http://127.0.0.1:8000/docs` and execute the `predict` endpoint
+
+## Helpful References
+  - [Adding own data to MNNIST](https://medium.com/@ashok.tankala/build-the-mnist-model-with-your-own-handwritten-digits-using-tensorflow-keras-and-python-f8ec9f871fd3)
