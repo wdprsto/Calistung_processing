@@ -1,26 +1,49 @@
-# ML Responsibilities
+# C22-PS283: Machine Learning Path
+## About Calistung
+Calistung: Baca, Tulis, Hitung is an application that provide educational features to help children learn to write, read, and count.
 
-| Week 1 | Week 2 | Week 3 | Week 4 | Week 5 |
-|:------:|:------:|:------:|:------:|:------:|
-| Collect Dataset | ML Model Evaluation & Improvement | Evaluate, retrain and retest Machine Learning Models iteratively, aiming good accuration (90%) | Integrating ML Model to MD App | Create Documentation  |
-| Create Machine Learning Model for Character Recognition | |  | ML Model Evaluation & Improvement | ML Model Evaluation & Improvement |
-| Develop Python code for TF Interpreter initialization, Image preprocessing, Inferencing, and Outputs fetching | | | |
+## Technology Used for ML Repo
+   - [Tensorflow](https://www.tensorflow.org/)
+   - [Python](https://www.python.org/)
+   - [FastAPI](https://fastapi.tiangolo.com/)
 
-# Installing Requirements
+## Dataset Resources
+   - [Kaggle A-Z Handwritten](https://www.kaggle.com/datasets/sachinpatel21/az-handwritten-alphabets-in-csv-format)
+   - MNIST Dataset
+   - [Additional Handwritten Character](https://drive.google.com/drive/folders/1dZ4tDnD2ju0sAffCIKa0dh4HpGrMSt2r?usp=sharing)
 
-`pip install -r requirements.txt`
+## Notebooks
+[Image Classification Folder](https://drive.google.com/drive/folders/17BGn8J50Ls_p-1w69yIlcQ4LjwJtX9OT?usp=sharing)
 
-# Character Recognition Endpoint
+## API URL Created by CC
+[Calistung](https://calistung.uc.r.appspot.com/) 
+
+## Installing FastAPI App
+  - Download the repo/clone it. Make it available on your device
+  - Open terminal and go to the project's directory
+  - Type `python -m venv env` and press enter (create virtual environment)
+  - For Windows user, type `env\Scripts\activate`. For Linux, type `source ./env/bin/activate` (accessing the virtual environment)
+  - Type `pip install -r requirements.txt` (installing the requirements)
+  - Serve the app by typing `uvicorn main:app --reload`
+  - It will run on `http://127.0.0.1:8000`
+
+## Character Recognition Endpoint
 
 | Endpoint | Method |           Body Sent          |                 Description                |
 |:--------:|:------:|:-----------------------------------:|:------------------------------------------:|
-|     /    |   GET  |                 None                |            Hello World Endpoint            |
-|     /predict    |  POST  |                 File ('image')               | Character Recognition from Model Inference |
+|     /    |   GET  |                 None                |            HTTP GET REQUEST Testing Endpoint            |
+|     /predict    |  POST  |                 Image file:  'Image'               | HTTP POST REQUEST Prediction Endpoint |
 
-Percobaan deployment [link](https://fastapi-calistung.herokuapp.com/docs)
+## How to predict image with Postman
+  - Open Postman App
+  - Enter URL request bar with `http://127.0.0.1:8000/predict`
+  - Select method POST
+  - Go to Body tab and select form-data
+  - Change key from form-data with file, with name `Image`
+  - Input the image that you want predict as a value of the key
+  - Send the request, or
+  - Simply access `http://127.0.0.1:8000/docs` and execute the `predict` endpoint
 
-Lihat semua model yang telah kami buat di sini [link](https://drive.google.com/drive/folders/17BGn8J50Ls_p-1w69yIlcQ4LjwJtX9OT?usp=sharing).  
-
-CeTu2-Pe2SWaPanGa
-
-Proyek Akhir Salvation
+## Helpful References
+  - [Adding own data to MNNIST](https://medium.com/@ashok.tankala/build-the-mnist-model-with-your-own-handwritten-digits-using-tensorflow-keras-and-python-f8ec9f871fd3)
+  - [Padding Same vs Valid](https://www.pico.net/kb/what-is-the-difference-between-same-and-valid-padding-in-tf-nn-max-pool-of-tensorflow)
