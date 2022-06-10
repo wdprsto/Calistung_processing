@@ -52,13 +52,14 @@ class TextRecognizer:
             return ''
 
         # sort the contour
-        sorted_box = self.sort_contour(conts)
+        if len(conts) > 1:
+            conts = self.sort_contour(conts)
 
         # prepare the output
-        for box in sorted_box:
+        for box in conts:
             (x, y, w, h) = box
             if (w >= min_w and w <= max_w) and (h >= min_h and h <= max_h):
-                # the one which is processed should be the greyscaled, not inverted dilated one
+                # which image will be used to be the baseline of the prediction? ps: it must be the inverted one.
                 self.process_box(thresh, x, y, w, h)
         
         pixels = np.array([pixel for pixel in self.characters], dtype = 'float32')
