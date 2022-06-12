@@ -13,7 +13,7 @@ Calistung: Baca, Tulis, Hitung is an application that provide educational featur
    - [Additional Handwritten Character](https://drive.google.com/drive/folders/1dZ4tDnD2ju0sAffCIKa0dh4HpGrMSt2r?usp=sharing)
 
 ## Notebooks
-[Image Classification Folder](https://drive.google.com/drive/folders/17BGn8J50Ls_p-1w69yIlcQ4LjwJtX9OT?usp=sharing)
+[Image Classification Folder](https://drive.google.com/drive/folders/1Q3EAY9WIJNiLmQbbTwH0CXu5ZroIM9Id?usp=sharing)
 
 ## API URL Created by CC
 [Calistung](https://calistung.uc.r.appspot.com/) 
