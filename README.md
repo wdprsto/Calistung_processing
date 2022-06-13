@@ -45,5 +45,5 @@ Calistung: Baca, Tulis, Hitung is an application that provide educational featur
   - Simply access `http://127.0.0.1:8000/docs` and execute the `predict` endpoint
 
 ## Helpful References
-  - [Adding own data to MNNIST](https://medium.com/@ashok.tankala/build-the-mnist-model-with-your-own-handwritten-digits-using-tensorflow-keras-and-python-f8ec9f871fd3)
+  - [Adding own data to MNIST](https://medium.com/@ashok.tankala/build-the-mnist-model-with-your-own-handwritten-digits-using-tensorflow-keras-and-python-f8ec9f871fd3)
   - [Padding Same vs Valid](https://www.pico.net/kb/what-is-the-difference-between-same-and-valid-padding-in-tf-nn-max-pool-of-tensorflow)
