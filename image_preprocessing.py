@@ -6,7 +6,7 @@ from imutils.contours import sort_contours
 class RequestImageConverter:
     def __init__(self, file):
         self.file = file
-
+    
     def convert(self) :
         numpy_image = np.fromstring(self.file, dtype='uint8')
         image = cv2.imdecode(numpy_image, cv2.IMREAD_COLOR)
@@ -40,6 +40,7 @@ class TextRecognizer:
 
         '''
         STEP 2: TEXT RECOGNIZER
+        SEGMENTATION
         '''
         # parameters
         min_w, max_w = 30, 1200 # sebelumnya 15. Untuk gambar ukuran 240, titik bisa dihilangkan dengan min w/h = 30
@@ -66,6 +67,7 @@ class TextRecognizer:
 
         return pixels
 
+    # Detect each characater in the image
     def contour_detection(self, img):
         conts = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
         conts = np.array([cv2.boundingRect(i) for i in conts])
@@ -76,7 +78,7 @@ class TextRecognizer:
         roi = conts[y:y + h, x:x + w]
         return roi
 
-    #Resize the Image
+    # Resize the Image
     def resize_img(self, img, w, h):
         if w > h:
             resized = imutils.resize(img, width = 28)
@@ -91,8 +93,8 @@ class TextRecognizer:
         filled = cv2.resize(filled, (28,28))
         return filled
 
+    # normalize the image, and expand the dimension so it click our model dims
     def normalization(self, img):
-        # normalize the image, and expand the dimension so it click our model dims
         img = img.astype('float32') / 255.0
         img = np.expand_dims(img, axis = -1)
         return img
@@ -101,7 +103,6 @@ class TextRecognizer:
         roi = self.extract_roi(img, x, y, w, h)
         resized = self.resize_img(roi, w, h)
         normalized = self.normalization(resized)
-
         self.characters.append(normalized)
 
     def sort_contour(self, conts):
@@ -113,7 +114,7 @@ class TextRecognizer:
         # y is greater that median of the char heights
         median_h = np.median(sort_by_line[:, -1])
         diff_y = np.diff(sort_by_line[:,1])
-        new_line = np.where(diff_y > median_h-5)[0] + 1 # nilai np.where perlu diubah agar pembagian linenya benar
+        new_line = np.where(diff_y > median_h-5)[0] + 1 #np.where value need to be adjust to make the code predict line by line better
         lines = np.array_split(sort_by_line, new_line)
 
         # sorted each lines from left.

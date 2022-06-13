@@ -7,6 +7,7 @@ class TFLiteInferencer:
     def __init__(self, image):
         recognizer = TextRecognizer(image)
         self.processed_data = recognizer.recognize_text()
+        self.classLabels = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
     def predict(self):
         # clear backend session of tf
@@ -30,25 +31,21 @@ class TFLiteInferencer:
             # run the inference
             interpreter.invoke()
 
-            # output_details[0]['index'] = the index which provides the input
             output_data.append(interpreter.get_tensor(output_details))
 
-        classLabels = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         # PROCESS TEXT, SINGLE OR MULTIPLE LINE
         if len(output_data)>1:
             predicted_data = []
             for prediction in output_data:
                 i = np.argmax(prediction)
-                character = classLabels[i]
+                character = self.classLabels[i]
                 predicted_data.append(character)
 
             output_text = "".join(predicted_data)
-            
         # PROCESS ONLY 1 CHARACTER
         elif len(output_data)==1:
             i = np.argmax(output_data[0])
-            output_text = classLabels[i]
-        
+            output_text = self.classLabels[i]
         # No Char
         else:
             output_text = ''
