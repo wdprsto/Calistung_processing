@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 from itertools import groupby
 from image_preprocessing import TextRecognizer
+import os
 
 class TFLiteInferencer:
     def __init__(self, image):
@@ -16,7 +17,9 @@ class TFLiteInferencer:
         pixels = self.processed_data
     
         # load tflite model
-        interpreter = tf.lite.Interpreter(model_path="model.tflite")
+        interpreter = tf.lite.Interpreter(model_path=os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            "model.tflite"))
         
         # Get input and output tensors.
         input_details = interpreter.get_input_details()[0]['index']

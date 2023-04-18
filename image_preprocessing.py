@@ -21,12 +21,14 @@ class TextRecognizer:
         '''
         STEP 1: IMAGE PREPROCESSING
         '''
+        # print(self.image.shape) #n,n,3
         # parameters
-        identitiy_matrix_shape = (3, 3) #used in dilatation
+        identitiy_matrix_shape = (3, 3) #used in dilatation (prev 3 3)
 
         # make the image color grey
         gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
-            
+        # n,n
+        
         # invert the image color
         _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
 
@@ -37,15 +39,16 @@ class TextRecognizer:
 
         # dilatate the image
         processed_image = cv2.dilate(edges, np.ones(identitiy_matrix_shape))
+        # processed_image = cv2.dilate(edges, np.ones((4,)))
 
         '''
         STEP 2: TEXT RECOGNIZER
         SEGMENTATION
         '''
         # parameters
-        min_w, max_w = 30, 1200 # sebelumnya 15. Untuk gambar ukuran 240, titik bisa dihilangkan dengan min w/h = 30
-        min_h, max_h = 30, 1200
-
+        min_w, max_w = 15, 1200 # sebelumnya 15. Untuk gambar ukuran 240, titik bisa dihilangkan dengan min w/h = 30. (update): dari 30 balik lagi jadi 15, karena mempertimbangkan lebar angka 1
+        min_h, max_h = 30, 1200 # mula-mula 30
+        
         # find countour
         conts = self.contour_detection(processed_image.copy())
         
